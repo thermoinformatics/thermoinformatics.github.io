@@ -1,0 +1,28 @@
+{{- $cat := index (.GetTerms "report_cat") 0 -}}
+					<article class="article-list__item">
+						<div class="card">
+							<a href="{{ .RelPermalink }}" class="card__image">
+{{- with .Params.thumbnail }}
+								<img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="">
+{{- else }}
+								<img src="{{ "img/no-image.jpg" | relURL }}" alt="NO IMAGE">
+{{- end }}
+							</a>
+{{- with $cat }}
+							<a href="{{ .RelPermalink }}" class="card__category category-link">{{ .LinkTitle }}</a>
+{{- end }}
+							<h2 class="card__title">
+								<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+							</h2>
+							<div class="card__info">
+								<span class="card__date date">{{ .Date.Format "2006.01.02" }}</span>
+{{- with .GetTerms "report_tag" }}
+								<ul class="card__tag tag-link">
+{{- range . }}
+									<li class="tag-link__item"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+{{- end }}
+								</ul>
+{{- end }}
+							</div>
+						</div>
+					</article>

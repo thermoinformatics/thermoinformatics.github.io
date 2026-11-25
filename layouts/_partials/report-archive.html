@@ -1,0 +1,59 @@
+{{- /* 活動報告一覧（全件／カテゴリ別／年別で共用）。 . = page */ -}}
+{{- $cur := . -}}
+{{- $pages := .Pages.ByDate.Reverse -}}
+{{- if eq .Kind "section" }}{{ $pages = (where site.RegularPages "Section" "report").ByDate.Reverse }}{{ end -}}
+{{- $pag := .Paginate $pages -}}
+<main class="l-main">
+<div class="page-title page-title--report">
+	<h1 class="page-title__title"><img src="{{ "img/txt_head_report.svg" | relURL }}" alt="活動報告"></h1>
+</div>
+<div class="l-wrapper">
+	<div class="l-row report-info">
+		<div class="l-col-9">
+			<div class="cat-info">
+				<div class="cat-info__row">
+					<p class="cat-info__head">CATEGORY</p>
+					<ul class="cat-info__items">
+{{- range site.Taxonomies.report_cat.ByCount }}
+						<li class="cat-info__item"><a href="{{ .Page.RelPermalink }}"{{ if eq .Page $cur }} class="is-current"{{ end }}>{{ .Page.LinkTitle }}</a></li>
+{{- end }}
+					</ul>
+				</div>
+{{- with site.Taxonomies.report_tag }}
+				<div class="cat-info__row">
+					<p class="cat-info__head">TAG</p>
+					<ul class="cat-info__items">
+{{- range .ByCount }}
+						<li class="cat-info__item"><a href="{{ .Page.RelPermalink }}"{{ if eq .Page $cur }} class="is-current"{{ end }}>{{ .Page.LinkTitle }}</a></li>
+{{- end }}
+					</ul>
+				</div>
+{{- end }}
+				<div class="cat-info__row">
+					<p class="cat-info__head">DATE</p>
+					<ul class="cat-info__items">
+{{- range site.Taxonomies.report_year.Alphabetical.Reverse }}
+						<li class="cat-info__item"><a href="{{ .Page.RelPermalink }}"{{ if eq .Page $cur }} class="is-current"{{ end }}>{{ .Page.LinkTitle }}</a></li>
+{{- end }}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="l-col-3">
+			<div class="report-found">
+				<span class="report-found__number">{{ len $pages }}</span>
+				<span class="report-found__text">REPORTS FOUND</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="report-archive">
+		<div class="article-list">
+{{- range $pag.Pages }}
+{{ partial "card.html" . }}
+{{- end }}
+		</div>
+	</div>
+{{ partial "pagination.html" $pag }}
+</div>
+</main>

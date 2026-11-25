@@ -1,0 +1,4 @@
+{{- /* ダウンロード用リンク： {{< file "/uploads/2026/03/xxx.pdf" >}}表示名{{< /file >}} */ -}}
+{{- $url := .Get 0 -}}
+{{- $label := .Inner | default (path.Base $url) -}}
+<div class="wp-block-file"><a href="{{ $url | strings.TrimPrefix "/" | relURL }}">{{ $label | markdownify }}</a><a href="{{ $url | strings.TrimPrefix "/" | relURL }}" class="wp-block-file__button" download>ダウンロード</a></div>

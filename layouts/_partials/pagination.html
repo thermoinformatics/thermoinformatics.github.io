@@ -1,0 +1,17 @@
+{{- if gt .TotalPages 1 }}
+<div class="pagination">
+{{- if .HasPrev }}
+<a class="prev page-numbers" href="{{ .Prev.URL }}">&laquo;</a>
+{{- end }}
+{{- range .Pagers }}
+{{- if eq .PageNumber $.PageNumber }}
+<span aria-current="page" class="page-numbers current">{{ .PageNumber }}</span>
+{{- else }}
+<a class="page-numbers" href="{{ .URL }}">{{ .PageNumber }}</a>
+{{- end }}
+{{- end }}
+{{- if .HasNext }}
+<a class="next page-numbers" href="{{ .Next.URL }}">&raquo;</a>
+{{- end }}
+</div>
+{{- end }}

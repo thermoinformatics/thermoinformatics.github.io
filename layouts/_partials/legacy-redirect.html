@@ -1,0 +1,29 @@
+{{- /* 旧WordPressのURL（?p=123 や ?report=... など）で来た人を新しいページへ転送する */ -}}
+{{- $m := dict -}}
+{{- range where site.RegularPages "Section" "report" -}}
+  {{- $rp := .RelPermalink -}}
+  {{- with .Params.wp_id }}{{ $m = merge $m (dict (printf "p=%v" .) $rp) }}{{ end -}}
+  {{- with .Params.wp_slug }}{{ $m = merge $m (dict (printf "report=%s" .) $rp) }}{{ end -}}
+{{- end -}}
+{{- range site.RegularPages -}}
+  {{- if and .Params.wp_id (in (slice "news" "en") .Section) -}}
+    {{- $m = merge $m (dict (printf "p=%v" .Params.wp_id) (printf "%s#%s" .Parent.RelPermalink .Params.anchor)) -}}
+  {{- end -}}
+{{- end -}}
+{{- range $k, $v := site.Taxonomies.report_cat }}{{ $m = merge $m (dict (printf "report_cat=%s" $k) $v.Page.RelPermalink) }}{{ end -}}
+{{- range $k, $v := site.Taxonomies.report_year }}{{ $m = merge $m (dict (printf "report_year=%s" $k) $v.Page.RelPermalink) }}{{ end -}}
+{{- $m = merge $m (dict "page_id=6" ("news/" | relURL) "page_id=9" ("en/" | relURL) "page_id=11" ("en/news/" | relURL) "post_type=report" ("report/" | relURL)) -}}
+<script>
+(function(){
+  if(!location.search) return;
+  var map={{ $m | jsonify | safeJS }};
+  var q=location.search.substring(1).split('&');
+  for(var i=0;i<q.length;i++){
+    var kv=q[i].split('='); var k=kv[0]; var v='';
+    try{ v=decodeURIComponent((kv[1]||'').replace(/\+/g,' ')); }catch(e){ v=kv[1]||''; }
+    var key=k+'='+v;
+    if(map[key]){ location.replace(map[key]); return; }
+    if(k==='report'){ for(var mk in map){ if(mk.indexOf('report=')===0 && (mk.indexOf(key)===0 || key.indexOf(mk)===0)){ location.replace(map[mk]); return; } } }
+  }
+})();
+</script>

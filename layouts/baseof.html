@@ -1,0 +1,32 @@
+{{- $lang := cond (hasPrefix .RelPermalink "/en/") "en" "ja" -}}
+<!DOCTYPE html>
+<html lang="{{ $lang }}">
+<head>
+<meta charset="UTF-8">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .RelPermalink "/en/" }}{{ site.Params.titleEn }}{{ else }}{{ .Title }} | {{ if eq $lang "en" }}{{ site.Params.titleEn }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width" />
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="//webfont.fontplus.jp/accessor/script/fontplus.js?y8XzNl7Of4U%3D&box=vdQn1Zs3wLo%3D&pm=1&aa=1&ab=2" charset="utf-8"></script>
+{{- if .IsHome }}{{ partial "legacy-redirect.html" . }}{{ end }}
+</head>
+<body>
+<div class="l-body{{ if eq $lang "en" }} lang-en{{ end }}">
+{{ partial "header.html" (dict "page" . "lang" $lang) }}
+{{ block "main" . }}{{ end }}
+{{ partial "footer.html" (dict "page" . "lang" $lang) }}
+</div>
+<script>window.SITE_IMG = "{{ "img/" | relURL }}";</script>
+<script src="{{ "js/jquery.min.js" | relURL }}"></script>
+<script src="{{ "js/ofi.min.js" | relURL }}"></script>
+<script src="{{ "js/stickyfill.min.js" | relURL }}"></script>
+<script src="{{ "js/common.js" | relURL }}"></script>
+</body>
+</html>

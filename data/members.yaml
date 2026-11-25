@@ -1,0 +1,54 @@
+# トップページ「主査・幹事」欄（上から順に表示）
+ja:
+  - position: 主査
+    name: 榎木 光治
+    title: 准教授
+    affiliation: ["電気通信大学", "情報理工学研究科", "機械知能システム学専攻"]
+    image: /img/ph_member_03.jpg
+    url_label: 研究室URL
+    url: https://www.therme.lab.uec.ac.jp/
+  - position: 幹事
+    name: 清 雄一
+    title: 教授
+    affiliation: ["電気通信大学", "情報理工学研究科", "情報学専攻"]
+    image: /img/ph_member_02.jpg
+    url_label: 研究室URL
+    url: http://www.sei.lab.uec.ac.jp
+  - position: 幹事
+    name: 大内 崇史
+    title: 主任技師
+    affiliation: ["福岡県工業技術センター", "機械電子研究所", "機械技術課"]
+    image: /wp-content/uploads/2024/05/ph_member_ouchi.jpg
+    url_label: 所属URL
+    url: https://www.fitc.pref.fukuoka.jp/center/org/meri/
+  - position: 幹事
+    name: 金城 富宏
+    title: 研究開発員
+    affiliation: ["宇宙航空研究開発機構", "研究開発部門", "第二研究ユニット"]
+    image: /wp-content/uploads/2024/05/ph_member_kinjo.jpg
+    url_label: 所属URL
+    url: https://www.jaxa.jp/
+
+# 英語版トップページ「Chair and Secretary」欄
+en:
+  - position: Chair
+    name: Takahiko Miyazaki, Ph.D.
+    title: Professor
+    affiliation: ["Kyushu University", "Faculty of Engineering Sciences", "Department of Advanced Environmental Science and Engineering"]
+    image: /img/ph_member_01.jpg
+    url_label: Laboratories URL
+    url: https://tecs-lab.kyushu-u.ac.jp/
+  - position: Secretary
+    name: Yuichi SEI, Ph.D.
+    title: Assosiate Professor
+    affiliation: ["The University of Electro-Communications", "Graduate School of Informatics and Engineering", "Department of Informatics"]
+    image: /img/ph_member_02.jpg
+    url_label: Laboratories URL
+    url: http://www.sei.lab.uec.ac.jp
+  - position: Secretary
+    name: Koji Enoki, Ph.D.
+    title: Assosiate Professor
+    affiliation: ["The University of Electro-Communications", "Graduate School of Informatics and Engineering", "Department of Mechanical and Intelligent Systems Engineering"]
+    image: /img/ph_member_03.jpg
+    url_label: Laboratories URL
+    url: https://www.therme.lab.uec.ac.jp/

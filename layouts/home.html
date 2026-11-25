@@ -1,0 +1,65 @@
+{{ define "main" }}
+<main class="l-main l-main--top">
+<div class="mv">
+	<div class="mv__bg">
+		<img src="{{ "img/img_mv_sp.png" | relURL }}" alt="" class="sp-only">
+		<img src="{{ "img/img_mv_pc.png" | relURL }}" alt="" class="pc-only">
+	</div>
+	<div class="mv__wrapper l-wrapper">
+		<p class="mv__copy">
+			<img src="{{ "img/txt_mv_sp.png" | relURL }}" alt="熱工学と情報学の融合により、新たなサーモインフォマティクスという学問分野を構築し、社会に還元する。" class="sp-only">
+			<img src="{{ "img/txt_mv_pc.png" | relURL }}" alt="熱工学と情報学の融合により、新たなサーモインフォマティクスという学問分野を構築し、社会に還元する。" class="pc-only">
+		</p>
+	</div>
+</div>
+
+<section class="home-about">
+	<span id="about" class="home-about__anchor"></span>
+	<div class="home-about__wrapper l-wrapper">
+		<div class="l-row l-row--center">
+			<div class="l-col-8 home-about__intro">
+				<h2 class="home-about__head heading-1"><img src="{{ "img/txt_home_about.svg" | relURL }}" alt="研究会について"></h2>
+				<p class="home-about__text">「サーモインフォマティクス研究会」は、「熱」と「情報学」の融合によってエネルギー・環境問題の解決につながる学術的研究や技術開発の飛躍的な発展を目指しています。<br>熱工学、環境工学、情報学を基盤に幅広い専門分野の研究者・技術者が集い、サーモインフォマティクスに関する情報収集・共有、意見交換、情報発信を行う研究会です。</p>
+			</div>
+		</div>
+		<div class="home-about__content">
+			<div class="article-list">
+{{- range first 6 (where site.RegularPages "Section" "report").ByDate.Reverse }}
+{{ partial "card.html" . }}
+{{- end }}
+			</div>
+			<div class="home-about__button">
+				<a href="{{ "report/" | relURL }}" class="button-1 button-1--blue-frame">活動報告</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="home-news">
+	<div class="l-wrapper">
+		<div class="l-row l-row--center">
+			<div class="l-col-3">
+				<h2 class="heading-1 heading-1--home-news"><img src="{{ "img/txt_home_news_sp.svg" | relURL }}" alt="お知らせ" class="change-img"></h2>
+			</div>
+			<div class="l-col-7">
+				<div class="news-list">
+{{ partial "news-summary.html" (dict "pages" (first 5 (site.GetPage "/news").Pages.ByDate.Reverse) "listURL" ("news/" | relURL)) }}
+				</div>
+			</div>
+		</div>
+		<div class="home-news__button">
+			<a href="{{ "news/" | relURL }}" class="button-1 button-1--blue-frame">お知らせ</a>
+		</div>
+	</div>
+</section>
+
+<section class="home-member">
+	<div class="l-wrapper">
+		<h2 class="heading-1 heading-1--mblg"><img src="{{ "img/txt_home_member.svg" | relURL }}" alt="主査・幹事"></h2>
+		<div class="home-member__content">
+{{ partial "members.html" site.Data.members.ja }}
+		</div>
+	</div>
+</section>
+</main>
+{{ end }}

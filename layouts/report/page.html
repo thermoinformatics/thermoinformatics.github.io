@@ -1,0 +1,97 @@
+{{ define "main" }}
+{{- $cat := index (.GetTerms "report_cat") 0 -}}
+{{- $all := (where site.RegularPages "Section" "report").ByDate -}}
+{{- $older := "" }}{{ $newer := "" -}}
+{{- range $i, $p := $all }}{{ if eq $p $ }}{{ if gt $i 0 }}{{ $older = index $all (sub $i 1) }}{{ end }}{{ if lt (add $i 1) (len $all) }}{{ $newer = index $all (add $i 1) }}{{ end }}{{ end }}{{ end -}}
+<main class="l-main l-main--no-head">
+<div class="l-wrapper">
+	<div class="l-row l-row--between">
+		<div class="l-col-8">
+			<div class="single-head">
+				<div class="single-head__info">
+{{- with $cat }}
+					<a href="{{ .RelPermalink }}" class="single-head__category category-link">{{ .LinkTitle }}</a>
+{{- end }}
+					<span class="single-head__date date">{{ .Date.Format "2006.01.02" }}</span>
+				</div>
+				<h1 class="single-head__title">{{ .Title }}</h1>
+{{- with .Params.subtitle }}
+				<p class="single-head__sub-title">{{ . }}</p>
+{{- end }}
+{{- with .GetTerms "report_tag" }}
+				<ul class="single-head__tag tag-link">
+{{- range . }}
+					<li class="tag-link__item"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+{{- end }}
+				</ul>
+{{- end }}
+			</div>
+			<div class="the_content">
+{{ .Content }}
+			</div>
+{{- with .Params.thumbnail }}
+			<figure class="single-thumb">
+				<img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="">
+			</figure>
+{{- end }}
+		</div>
+		<div class="l-col-3">
+			<div class="sidebar js-sticky-sidebar">
+{{- with .Params.links }}
+				<div class="sidebar__section">
+					<p class="sidebar__head">LINK</p>
+					<div class="sidebar__content">
+						<ul class="side-link">
+{{- range . }}
+							<li class="side-link__item">
+								<a href="{{ .url | strings.TrimPrefix "/" | relURL }}" class="side-link__inner">
+									<span class="side-link__title">{{ .title }}</span>
+									<span class="side-link__url">{{ .url | absURL }}</span>
+								</a>
+							</li>
+{{- end }}
+						</ul>
+					</div>
+				</div>
+{{- end }}
+				<div class="sidebar__section">
+					<p class="sidebar__head">CATEGORY</p>
+					<div class="sidebar__content">
+						<ul class="side-category">
+{{- range site.Taxonomies.report_cat.ByCount }}
+							<li class="side-category__item">
+								<a href="{{ .Page.RelPermalink }}" class="side-category__inner">{{ .Page.LinkTitle }}</a>
+							</li>
+{{- end }}
+						</ul>
+					</div>
+				</div>
+{{- with site.Taxonomies.report_tag }}
+				<div class="sidebar__section">
+					<p class="sidebar__head">TAG</p>
+					<div class="sidebar__content">
+						<ul class="side-tag">
+{{- range .ByCount }}
+							<li class="side-tag__item">
+								<a href="{{ .Page.RelPermalink }}" class="side-category__inner">{{ .Page.LinkTitle }}</a>
+							</li>
+{{- end }}
+						</ul>
+					</div>
+				</div>
+{{- end }}
+			</div>
+		</div>
+	</div>
+
+	<ul class="page-nav l-row l-row--between">
+		<li class="page-nav__item page-nav__item--prev l-col-5">
+			{{ with $older }}<a href="{{ .RelPermalink }}" rel="prev">{{ .Title }}</a>{{ end }}
+		</li>
+		<li class="page-nav__item page-nav__item--next l-col-5">
+			{{ with $newer }}<a href="{{ .RelPermalink }}" rel="next">{{ .Title }}</a>{{ end }}
+		</li>
+	</ul>
+</div>
+</main>
+{{ end }}

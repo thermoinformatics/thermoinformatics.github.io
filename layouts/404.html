@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main class="l-main">
+<div class="page-title page-title--404">
+	<h1 class="page-title__title"><img src="{{ "img/txt_head_404.svg" | relURL }}" alt="404"></h1>
+</div>
+
+<div class="l-wrapper">
+	<div class="not-found">
+		<h2 class="not-found__head">お探しのページが<br class="sp-only">見つかりません。</h2>
+		<p class="not-found__text">お探しのページは一時的にアクセスができない状況にあるか、<br class="pc-only">移動もしくは削除された可能性があります。</p>
+		<a href="{{ site.Home.RelPermalink }}" class="button-1 button-1--blue-frame">トップページへ</a>
+	</div>
+</div>
+</main>
+{{ end }}

@@ -1,0 +1,42 @@
+<footer class="l-footer footer">
+	<div class="l-wrapper footer__wrapper">
+		<span class="footer__deco" id="footer-deco"></span>
+{{- if eq .lang "ja" }}
+		<div class="footer__wrap l-row l-row--center">
+			<div class="l-col-1">
+				<p class="footer__en-head">CONTACT</p>
+			</div>
+			<div class="footer__intro l-col-3">
+				<p class="footer__head">お問い合わせ</p>
+				<p class="footer__text">研究会へのご質問やご意見、<br class="pc-only">メンバー参加のご相談など、以下よりご連絡ください。</p>
+			</div>
+			<div class="footer__info l-col-5 l-col-5--offset-1">
+				<div class="footer__address">
+					<p>〒182-8585<br>東京都調布市調布ヶ丘1-5-1</p>
+					<p>電気通信大学大学院 機械知能システム学専攻<br>榎木研究室<br>サーモインフォマティクス研究会</p>
+				</div>
+				<p class="footer__tel">TEL. 042-443-5337</p>
+				<a href="mailto:{{ site.Params.email }}" class="footer__mail">{{ site.Params.email }}</a>
+			</div>
+		</div>
+{{- else }}
+		<div class="footer__wrap l-row l-row--center">
+			<div class="l-col-1">
+			</div>
+			<div class="footer__intro l-col-3">
+				<p class="footer__head">Contact</p>
+				<p class="footer__text">If you have any questions or comments about the study group, or would like to discuss membership, please contact from the following link.</p>
+			</div>
+			<div class="footer__info l-col-5 l-col-5--offset-1">
+				<div class="footer__address">
+					<p>〒816-8580<br>6-1 Kasuga Park, Kasuga City, Fukuoka Prefecture</p>
+					<p>Kyushu University Faculty of Engineering Sciences Department of Advanced Environmental Science and Engineering<br>Thermal Energy Conversion Systems Laboratory</p>
+				</div>
+				<p class="footer__tel">TEL. +81-92-583-7832</p>
+				<a href="mailto:{{ site.Params.email }}" class="footer__mail">{{ site.Params.email }}</a>
+			</div>
+		</div>
+{{- end }}
+		<small class="footer__copy">Copyright (C) Technical Section on Thermoinformatics<br class="sp-only"> All rights reserved.</small>
+	</div>
+</footer>

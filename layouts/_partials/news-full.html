@@ -1,0 +1,40 @@
+{{- /* お知らせ一覧ページ。 . = page */ -}}
+{{- $pag := .Paginate .Pages.ByDate.Reverse -}}
+<main class="l-main">
+<div class="page-title page-title--news">
+	<h1 class="page-title__title">{{ if hasPrefix .RelPermalink "/en/" }}<img src="{{ "img/txt_home_news_en.svg" | relURL }}" alt="NEWS">{{ else }}<img src="{{ "img/txt_head_news.svg" | relURL }}" alt="お知らせ">{{ end }}</h1>
+</div>
+
+<div class="l-wrapper">
+	<div class="l-row l-row--center">
+		<div class="l-col-10 news-archive">
+			<div class="news-list news-list--split">
+{{- range $pag.Pages }}
+				<article class="news-list__item">
+					<span class="news-list__anchor" id="{{ .Params.anchor | default .File.ContentBaseName }}"></span>
+					<div class="news-list__wrap">
+						<span class="news-list__date date">{{ .Date.Format "2006.01.02" }}</span>
+						<span class="news-list__category">{{ .Params.category }}</span>
+					</div>
+					<div class="news-list__main">
+						<h2 class="news-list__title">{{ .Title }}</h2>
+{{- with .Params.file }}
+						<div class="news-list__file">
+							<a href="{{ .url | strings.TrimPrefix "/" | relURL }}" target="_blank">{{ .name | default (path.Base .url) }}</a>
+{{- with .size }}
+							<span class="news-list__file__size">({{ . }})</span>
+{{- end }}
+						</div>
+{{- end }}
+						<div class="news-list__content the_news-content">
+{{ .Content }}
+						</div>
+					</div>
+				</article>
+{{- end }}
+			</div>
+		</div>
+	</div>
+{{ partial "pagination.html" $pag }}
+</div>
+</main>

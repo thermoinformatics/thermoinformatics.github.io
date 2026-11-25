@@ -1,0 +1,5 @@
+/* WordPressのブロック用CSSの代わり（ダウンロードリンク・画像） */
+.the_content .wp-block-file { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 16px; }
+.the_content .wp-block-file__button { display: inline-block; padding: 4px 16px; border-radius: 2em; background: #032140; color: #fff !important; font-size: 0.85em; text-decoration: none !important; line-height: 1.8; }
+.the_content .wp-block-file__button:hover { opacity: .8; }
+.the_content p > img { max-width: 100%; height: auto; display: block; }

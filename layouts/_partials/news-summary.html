@@ -1,0 +1,17 @@
+{{- /* トップページ用：お知らせの抜粋。 . = dict "pages" "listURL" */ -}}
+{{- range .pages }}
+					<article class="news-list__item">
+						<div class="news-list__wrap">
+							<span class="news-list__date date">{{ .Date.Format "2006.01.02" }}</span>
+							<a href="{{ $.listURL }}" class="news-list__category">{{ .Params.category }}</a>
+						</div>
+						<a href="{{ $.listURL }}#{{ .Params.anchor | default .File.ContentBaseName }}" class="news-list__main news-list__main--link">
+							<h3 class="news-list__title">{{ .Title }}</h3>
+							<div class="news-list__content the_news-content">
+{{- with .Plain | strings.TrimSpace }}
+<p>{{ . | truncate 90 " […]" }}</p>
+{{- end }}
+							</div>
+						</a>
+					</article>
+{{- end }}

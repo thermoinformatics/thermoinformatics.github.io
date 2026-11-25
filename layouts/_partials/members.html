@@ -1,0 +1,21 @@
+			<div class="member">
+{{- range . }}
+				<div class="member__item">
+					<figure class="member__image">
+						<img src="{{ .image | strings.TrimPrefix "/" | relURL }}" alt="{{ .name }}の写真">
+					</figure>
+					<div class="member__main">
+						<span class="member__position">{{ .position }}</span>
+						<h3 class="member__name">{{ .name }}</h3>
+						<p class="member__info">{{ .title }}</p>
+						<p class="member__info">{{ delimit .affiliation "<br>" | safeHTML }}</p>
+{{- if .url }}
+						<div class="member__link">
+							<h4 class="member__link__head">{{ .url_label | default "URL" }}</h4>
+							<a href="{{ .url }}" class="member__link__url" target="_blank">{{ .url }}</a>
+						</div>
+{{- end }}
+					</div>
+				</div>
+{{- end }}
+			</div>

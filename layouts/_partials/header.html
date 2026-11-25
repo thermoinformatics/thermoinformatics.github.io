@@ -1,0 +1,60 @@
+{{- $p := .page -}}{{- $lang := .lang -}}
+{{- $isReport := eq $p.Section "report" -}}
+{{- $isNews := or (eq $p.Section "news") (hasPrefix $p.RelPermalink "/en/news/") -}}
+{{- $isTop := or $p.IsHome (eq $p.RelPermalink "/en/") -}}
+<header class="l-header">
+	<div class="header">
+		{{ if $isTop }}<h1 class="header__logo">{{ else }}<div class="header__logo">{{ end }}
+			<a href="{{ if eq $lang "en" }}{{ "en/" | relURL }}{{ else }}{{ site.Home.RelPermalink }}{{ end }}">
+{{ partial "logo.svg.html" . }}
+			</a>
+		{{ if $isTop }}</h1>{{ else }}</div>{{ end }}
+		<div class="header__nav">
+			<nav class="nav">
+{{- if eq $lang "ja" }}
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a href="{{ site.Home.RelPermalink }}#about" class="nav__inner">研究会について</a>
+					</li>
+					<li class="nav__item">
+						<a href="{{ "report/" | relURL }}" class="nav__inner{{ if $isReport }} is-current{{ end }}">活動報告</a>
+					</li>
+					<li class="nav__item">
+						<a href="{{ "news/" | relURL }}" class="nav__inner{{ if $isNews }} is-current{{ end }}">お知らせ</a>
+					</li>
+					<li class="nav__item">
+						<a href="mailto:{{ site.Params.email }}" class="nav__inner">お問い合わせ</a>
+					</li>
+				</ul>
+{{- else }}
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a href="{{ if $isTop }}#about{{ else }}{{ "en/" | relURL }}#about{{ end }}" class="{{ if $isTop }}anchor {{ end }}nav__inner">About Us</a>
+					</li>
+					<li class="nav__item">
+						<a href="{{ "en/news/" | relURL }}" class="nav__inner{{ if $isNews }} is-current{{ end }}">News</a>
+					</li>
+					<li class="nav__item">
+						<a href="mailto:{{ site.Params.email }}" class="nav__inner">Contact</a>
+					</li>
+				</ul>
+{{- end }}
+			</nav>
+			<ul class="lang-control">
+				<li class="lang-control__item">
+					<a href="{{ site.Home.RelPermalink }}" class="lang-control__inner{{ if eq $lang "ja" }} is-active{{ end }}">JA</a>
+				</li>
+				<li class="lang-control__item">
+					<a href="{{ "en/" | relURL }}" class="lang-control__inner{{ if eq $lang "en" }} is-active{{ end }}">EN</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="menu-btn">
+		<div class="menu-btn__icon">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</header>

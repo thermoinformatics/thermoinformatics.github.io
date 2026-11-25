@@ -1,0 +1,38 @@
+baseURL = "https://thermoinformatics.github.io/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
+title = "サーモインフォマティクス研究会"
+hasCJKLanguage = true
+timeZone = "Asia/Tokyo"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "rss"]
+
+[params]
+  titleEn = "Technical Section on Thermoinformatics"
+  description = "日本機械学会 環境工学部門 サーモインフォマティクス研究会の公式サイトです。"
+  email = "info@thermoinformatics.lab.uec.ac.jp"
+
+[taxonomies]
+  report_cat = "report_cat"
+  report_tag = "report_tag"
+  report_year = "report_year"
+
+[pagination]
+  pagerSize = 10
+
+[markup.goldmark.renderer]
+  unsafe = true
+  hardWraps = true
+
+[markup.goldmark.extensions.cjk]
+  enable = true
+  eastAsianLineBreaks = false
+  escapedSpace = true
+
+[outputs]
+  home = ["html"]
+  section = ["html"]
+  term = ["html"]
+
+[markup.goldmark.extensions.typographer]
+  disable = true

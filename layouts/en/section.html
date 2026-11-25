@@ -1,0 +1,54 @@
+{{ define "main" }}
+<main class="l-main l-main--top">
+<div class="mv">
+	<div class="mv__bg">
+		<img src="{{ "img/img_mv_sp.png" | relURL }}" alt="" class="sp-only">
+		<img src="{{ "img/img_mv_pc.png" | relURL }}" alt="" class="pc-only">
+	</div>
+	<div class="mv__wrapper l-wrapper">
+		<p class="mv__copy">
+			<img src="{{ "img/txt_mv_en.png" | relURL }}" alt="“thermoinformatics,” as a new research field that combines thermal engineering and informatics.">
+		</p>
+	</div>
+</div>
+
+<section class="home-about">
+	<span id="about" class="home-about__anchor"></span>
+	<div class="home-about__wrapper l-wrapper">
+		<div class="l-row l-row--center">
+			<div class="l-col-8 home-about__intro">
+				<h2 class="home-about__head heading-1"><img src="{{ "img/txt_home_about_en.svg" | relURL }}" alt="About Us"></h2>
+				<p class="home-about__text"> "Thermoinfomatics" Research Group aims at the remarkable development of academic research and technological development that will lead to the solution of energy and environmental problems through the fusion of "thermal engi-neering" and "informatics".<br>Researchers and engineers from a wide range of specialized fields based on thermal engineering, environmental engineering, and informatics gather to collect and share information, exchange opinions, and disseminate information on thermoinformatics.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="home-news">
+	<div class="l-wrapper">
+		<div class="l-row l-row--center">
+			<div class="l-col-3">
+				<h2 class="heading-1 heading-1--home-news"><img src="{{ "img/txt_home_news_en.svg" | relURL }}" alt="NEWS"></h2>
+			</div>
+			<div class="l-col-7">
+				<div class="news-list">
+{{ partial "news-summary.html" (dict "pages" (first 5 (site.GetPage "/en/news").Pages.ByDate.Reverse) "listURL" ("en/news/" | relURL)) }}
+				</div>
+			</div>
+		</div>
+		<div class="home-news__button">
+			<a href="{{ "en/news/" | relURL }}" class="button-1 button-1--blue-frame">News</a>
+		</div>
+	</div>
+</section>
+
+<section class="home-member">
+	<div class="l-wrapper">
+		<h2 class="heading-1 heading-1--member heading-1--mblg"><img src="{{ "img/txt_home_member_en.svg" | relURL }}" alt="Chair and Secretary"></h2>
+		<div class="home-member__content">
+{{ partial "members.html" site.Data.members.en }}
+		</div>
+	</div>
+</section>
+</main>
+{{ end }}
